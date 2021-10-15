@@ -29,3 +29,11 @@ export const getFormData = async (req, res) => {
   );
   return formData;
 };
+
+export const getMarkerData = async (req, res) => {
+  const marker = await Marker.find({
+    latitude: req.body[0],
+    longitude: req.body[1],
+  });
+  res.send(marker);
+};
