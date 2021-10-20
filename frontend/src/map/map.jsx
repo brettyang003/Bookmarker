@@ -4,6 +4,7 @@ import axios from "axios";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import MarkerPopup from "./markerPopup";
 import MapPopup from "./mapPopup";
+import { Card, ListGroup, Button } from "react-bootstrap";
 
 function Map() {
   const [viewport, setViewport] = useState({
@@ -18,14 +19,15 @@ function Map() {
   const handleShow = () => setShow(true);
   const [popupIndex, setPopupIndex] = useState(null);
   const [allowed, setAllowed] = useState(true);
+
   const getMarkers = () => {
     axios.get("/marker/").then((res) => {
       setMarkers(res.data);
       return markers;
     });
   };
-
   getMarkers();
+  markerList();
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((pos) => {
@@ -37,8 +39,25 @@ function Map() {
     });
   });
 
+  function markerList() {
+    let list = (
+      <Card style={{ width: "18rem" }}>
+        <Card.Header>Featured</Card.Header>
+        <ListGroup variant="flush">
+          {markers.map((marker) => {
+            return (
+              <ListGroup.Item action href="#link1">
+                {marker.destination}
+              </ListGroup.Item>
+            );
+          })}
+        </ListGroup>
+      </Card>
+    );
+    return list;
+  }
+
   function addMarker(e) {
-    console.log(allowed);
     if (allowed) {
       const [lng, lat] = e.lngLat;
       setCurrCoords({ lng, lat });
@@ -73,6 +92,44 @@ function Map() {
       }}
       onClick={addMarker}
     >
+      <div
+        style={{ position: "absolute", right: 20, top: 20, zIndex: 2 }}
+      ></div>
+      <div style={{ position: "absolute", left: 20, top: 20, zIndex: 1 }}>
+        <Card onMouseHover={() => setAllowed(false)} style={{ width: "18rem" }}>
+          <Card.Header>Markers</Card.Header>
+          <ListGroup variant="flush">
+            {markers.map((marker, i) => {
+              return (
+                <ListGroup.Item action href={`link${i}`}>
+                  {marker.destination}
+                  <Button
+                    style={{
+                      float: "right",
+                      width: "20%",
+                      fontSize: "12px",
+                    }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setAllowed(false);
+                      setViewport({
+                        ...viewport,
+                        longitude: marker.longitude,
+                        latitude: marker.latitude,
+                        zoom: 13,
+                      });
+                    }}
+                    variant="success"
+                  >
+                    Go
+                  </Button>
+                </ListGroup.Item>
+              );
+            })}
+          </ListGroup>
+        </Card>
+      </div>
+
       {markers.map((marker, i) => {
         return (
           <Marker
