@@ -30,8 +30,8 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 
 ### Built With
 
-* [MongoDB] (https://www.mongodb.com/)
-* [Express] (https://expressjs.com/)
+* [MongoDB](https://www.mongodb.com/)
+* [Express](https://expressjs.com/)
 * [React.js](https://reactjs.org/)
 * [Node.js](https://nodejs.org/en/)
 * [Bootstrap](https://getbootstrap.com)
