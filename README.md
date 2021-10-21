@@ -26,9 +26,6 @@ Bookmark points of interest
 <h2>Create a Point of Interest</h2>
  <img src="https://user-images.githubusercontent.com/46846116/138195699-e704c613-ce51-4c1f-92c3-06a23f7aed5b.png" alt="Logo" >
 
-<h2>Create a Point of Interest</h2>
- <img src="https://user-images.githubusercontent.com/46846116/138195699-e704c613-ce51-4c1f-92c3-06a23f7aed5b.png" alt="Logo" >
-
 
 
 
